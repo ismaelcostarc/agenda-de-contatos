@@ -1,7 +1,18 @@
 <template>
   <div class="empty-agenda">
     <modal-component v-if="showModal" @close="showModal = false">
-      <h3 slot="header">custom header</h3>
+      <div slot="header">Criar novo contato</div>
+      <div slot="body">
+        <form>
+          <input-component label="Nome" id="name" block></input-component>
+          <input-component label="E-mail" id="email" block></input-component>
+          <input-component label="Telefone" id="phone"></input-component>
+        </form>
+      </div>
+      <div slot="footer" class="new-contact-modal__footer">
+        <button-component type="secondary">Salvar</button-component>
+        <link-component>Cancelar</link-component>
+      </div>
     </modal-component>
 
     <img
@@ -19,14 +30,18 @@
   </div>
 </template>
 <script>
-import ButtonComponent from "./ButtonComponent.vue";
-import ModalComponent from "./ModalComponent.vue";
+import ButtonComponent from "../components/ButtonComponent.vue";
+import ModalComponent from "../components/ModalComponent.vue";
+import LinkComponent from "../components/LinkComponent.vue";
+import InputComponent from "../components/InputComponent.vue";
 
 export default {
   name: "EmptyAgenda",
   components: {
     ButtonComponent,
     ModalComponent,
+    LinkComponent,
+    InputComponent,
   },
   data() {
     return {
@@ -58,5 +73,10 @@ export default {
     justify-content: space-between;
     gap: 0.5rem;
   }
+}
+
+.new-contact-modal__footer {
+  display: flex;
+  flex-direction: row-reverse;
 }
 </style>

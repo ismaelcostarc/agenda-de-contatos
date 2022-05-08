@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import HeaderBar from "./components/HeaderBar.vue";
-import EmptyAgenda from "./components/EmptyAgenda.vue";
+import HeaderBar from "./partials/HeaderBar.vue";
+import EmptyAgenda from "./partials/EmptyAgenda.vue";
 
 export default {
   name: "App",

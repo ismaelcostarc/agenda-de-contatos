@@ -30,9 +30,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .button {
-  width: 9rem;
   height: 2.5rem;
-  padding: 0.75rem 1.375rem 0.75rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 20px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16),
     0 0 0 0.5px var(--black-8), inset 0 0 0 0.5px var(--black-8),
@@ -40,6 +39,7 @@ export default {
   border: none;
   cursor: pointer;
   font-size: 0.875rem;
+  text-align: center;
 
   &--primary {
     background-color: var(--light-yellowish-green);
