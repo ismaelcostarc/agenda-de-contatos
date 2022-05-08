@@ -3,15 +3,32 @@
     <modal-component v-if="showModal" @close="showModal = false">
       <div slot="header">Criar novo contato</div>
       <div slot="body">
-        <form>
-          <input-component label="Nome" id="name" block></input-component>
-          <input-component label="E-mail" id="email" block></input-component>
-          <input-component label="Telefone" id="phone"></input-component>
+        <form class="new-contact__modal__form">
+          <input-component
+            label="Nome"
+            id="name"
+            v-model="name"
+            block
+          ></input-component>
+          <input-component
+            label="E-mail"
+            id="email"
+            v-model="email"
+            block
+          ></input-component>
+          <input-component
+            label="Telefone"
+            id="phone"
+            v-model="phone"
+            v-mask="'(##) #####-####'"
+          ></input-component>
         </form>
       </div>
-      <div slot="footer" class="new-contact-modal__footer">
-        <button-component type="secondary">Salvar</button-component>
-        <link-component>Cancelar</link-component>
+      <div slot="footer" class="new-contact__modal__footer">
+        <button-component type="secondary" :disabled="isFormEmpty"
+          >Salvar</button-component
+        >
+        <link-component @clicked="showModal = false">Cancelar</link-component>
       </div>
     </modal-component>
 
@@ -46,7 +63,15 @@ export default {
   data() {
     return {
       showModal: false,
+      name: "",
+      email: "",
+      phone: "",
     };
+  },
+  computed: {
+    isFormEmpty() {
+      return !this.name && !this.email && !this.phone;
+    },
   },
 };
 </script>
@@ -75,7 +100,13 @@ export default {
   }
 }
 
-.new-contact-modal__footer {
+.new-contact__modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.new-contact__modal__footer {
   display: flex;
   flex-direction: row-reverse;
 }

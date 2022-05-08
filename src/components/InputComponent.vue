@@ -6,6 +6,8 @@
       :id="'input-' + id"
       class="input"
       :class="{ 'input--block': block }"
+      @input="handleInput"
+      v-mask="'(##) #####-####'"
     />
   </div>
 </template>
@@ -25,6 +27,19 @@ export default {
     id: {
       type: String,
       required: true,
+    },
+    value: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      content: this.value,
+    };
+  },
+  methods: {
+    handleInput(e) {
+      this.$emit("input", e.target.value);
     },
   },
 };

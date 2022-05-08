@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <input type="text" v-mask="'####-##'" v-model="myInputModel" />
+
     <div class="home">
       <header-bar />
       <empty-agenda />
@@ -16,6 +18,11 @@ export default {
   components: {
     HeaderBar,
     EmptyAgenda,
+  },
+  data() {
+    return {
+      myInputModel: "",
+    };
   },
 };
 </script>
