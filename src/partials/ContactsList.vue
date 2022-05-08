@@ -12,7 +12,7 @@
       <tr
         :key="index"
         :class="{
-          'table__row--highlighted': mustBeHighlighted(index),
+          'table__row--highlighted': false,
         }"
       >
         <td>
@@ -26,7 +26,10 @@
         <td>{{ contact.name }}</td>
         <td>{{ contact.email }}</td>
         <td>{{ contact.phone }}</td>
-        <td></td>
+        <td class="table__icons">
+          <img src="@/assets/img/ic-edit.svg" @click="editContact(index)" />
+          <img src="@/assets/img/ic-delete.svg" @click="removeContact(index)" />
+        </td>
       </tr>
     </template>
   </table>
@@ -44,12 +47,16 @@ export default {
   },
   watch: {
     newContact(value) {
+      // console.log(value);
       if (value) {
         setTimeout(() => {
           this.$emit("newContactExpired");
         }, 2000);
       }
     },
+  },
+  mounted() {
+    console.log(this.newContact);
   },
   computed: {
     ...mapState(["contacts"]),
@@ -58,11 +65,11 @@ export default {
     firstLetter(name) {
       return name.charAt(0).toUpperCase();
     },
-    mustBeHighlighted(index) {
-      const isLastContactAdded = index === this.contacts.length - 1;
-      console.log(isLastContactAdded);
-
-      return isLastContactAdded && this.newContact;
+    mustBeHighlighted(contact) {
+      return contact.isLast && this.newContact;
+    },
+    editContact(index) {
+      this.$emit("showEditModal", index);
     },
   },
 };
@@ -110,5 +117,14 @@ export default {
 
 .table__row--highlighted td {
   background-color: var(--very-light-pink);
+}
+
+.table__icons {
+  display: flex;
+  gap: 1rem;
+
+  img {
+    cursor: pointer;
+  }
 }
 </style>
