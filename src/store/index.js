@@ -10,6 +10,7 @@ export default new Vuex.Store({
   getters: {},
   mutations: {
     ADD_CONTACT(state, data) {
+      data.color = Math.floor(Math.random() * 16777215).toString(16);
       this.state.contacts.push(data);
     },
     REMOVE_CONTACT(state, index) {

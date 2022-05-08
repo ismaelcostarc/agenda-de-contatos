@@ -10,7 +10,14 @@
 
     <template v-for="(contact, index) in contacts">
       <tr :key="index">
-        <td></td>
+        <td>
+          <div
+            class="table__first-letter"
+            :style="{ 'background-color': '#' + contact.color }"
+          >
+            {{ firstLetter(contact.name) }}
+          </div>
+        </td>
         <td>{{ contact.name }}</td>
         <td>{{ contact.email }}</td>
         <td>{{ contact.phone }}</td>
@@ -26,6 +33,11 @@ export default {
   name: "ContactsList",
   computed: {
     ...mapState(["contacts"]),
+  },
+  methods: {
+    firstLetter(name) {
+      return name.charAt(0).toUpperCase();
+    },
   },
 };
 </script>
@@ -58,6 +70,15 @@ export default {
     &:last-child {
       width: 6rem;
     }
+  }
+
+  .table__first-letter {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 100%;
+    text-align: center;
+    color: var(--white-two);
   }
 }
 </style>
