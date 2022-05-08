@@ -5,7 +5,9 @@
       srcset="@/assets/img/ic-book@2x.png 2x, @/assets/img/ic-book@3x.png 3x"
       class="empty-agenda__book"
     />
+
     <span class="Text-Style">Nenhum contato foi criado ainda</span>
+
     <button-component @clicked="$emit('newContact')">
       <div class="empty-agenda__new-contact-button">
         <img src="@/assets/img/ic-plus.svg" class="ic_plus" />

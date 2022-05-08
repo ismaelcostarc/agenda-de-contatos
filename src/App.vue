@@ -36,7 +36,7 @@
     </modal-component>
 
     <div class="home">
-      <header-bar />
+      <header-bar @newContact="showModal = true" />
       <empty-agenda @newContact="showModal = true" v-if="!contacts.length" />
       <contacts-list v-else />
     </div>
