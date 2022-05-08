@@ -1,12 +1,16 @@
 <template>
   <div class="empty-agenda">
+    <modal-component v-if="showModal" @close="showModal = false">
+      <h3 slot="header">custom header</h3>
+    </modal-component>
+
     <img
       src="@/assets/img/ic-book.png"
       srcset="@/assets/img/ic-book@2x.png 2x, @/assets/img/ic-book@3x.png 3x"
       class="empty-agenda__book"
     />
     <span class="Text-Style">Nenhum contato foi criado ainda</span>
-    <button-component>
+    <button-component @clicked="showModal = true">
       <div class="empty-agenda__new-contact-button">
         <img src="@/assets/img/ic-plus.svg" class="ic_plus" />
         <span>Criar contato</span>
@@ -16,11 +20,18 @@
 </template>
 <script>
 import ButtonComponent from "./ButtonComponent.vue";
+import ModalComponent from "./ModalComponent.vue";
 
 export default {
   name: "EmptyAgenda",
   components: {
     ButtonComponent,
+    ModalComponent,
+  },
+  data() {
+    return {
+      showModal: false,
+    };
   },
 };
 </script>

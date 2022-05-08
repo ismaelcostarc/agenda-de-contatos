@@ -6,6 +6,7 @@
       'button--secondary': type === 'secondary',
       'button--disabled': disabled,
     }"
+    @click="$emit('clicked')"
   >
     <slot></slot>
   </button>
@@ -18,6 +19,11 @@ export default {
       type: String,
       required: false,
       default: "primary",
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
 };
@@ -47,6 +53,10 @@ export default {
 
   &--disabled {
     opacity: 0.32;
+  }
+
+  &:active {
+    border: none;
   }
 }
 </style>
