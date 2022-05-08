@@ -7,7 +7,6 @@
       class="input"
       :class="{ 'input--block': block }"
       @input="handleInput"
-      v-mask="'(##) #####-####'"
     />
   </div>
 </template>

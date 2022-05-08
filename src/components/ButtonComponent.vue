@@ -6,7 +6,7 @@
       'button--secondary': type === 'secondary',
       'button--disabled': disabled,
     }"
-    @click="$emit('clicked')"
+    @click="!disabled && $emit('clicked')"
   >
     <slot></slot>
   </button>
@@ -53,6 +53,7 @@ export default {
 
   &--disabled {
     opacity: 0.32;
+    cursor: initial;
   }
 
   &:active {
