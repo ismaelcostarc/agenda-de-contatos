@@ -9,7 +9,12 @@
     </tr>
 
     <template v-for="(contact, index) in contacts">
-      <tr :key="index">
+      <tr
+        :key="index"
+        :class="{
+          'table__row--highlighted': mustBeHighlighted(index),
+        }"
+      >
         <td>
           <div
             class="table__first-letter"
@@ -31,12 +36,33 @@ import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "ContactsList",
+  props: {
+    newContact: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  watch: {
+    newContact(value) {
+      if (value) {
+        setTimeout(() => {
+          this.$emit("newContactExpired");
+        }, 2000);
+      }
+    },
+  },
   computed: {
     ...mapState(["contacts"]),
   },
   methods: {
     firstLetter(name) {
       return name.charAt(0).toUpperCase();
+    },
+    mustBeHighlighted(index) {
+      const isLastContactAdded = index === this.contacts.length - 1;
+      console.log(isLastContactAdded);
+
+      return isLastContactAdded && this.newContact;
     },
   },
 };
@@ -80,5 +106,9 @@ export default {
     text-align: center;
     color: var(--white-two);
   }
+}
+
+.table__row--highlighted td {
+  background-color: var(--very-light-pink);
 }
 </style>
