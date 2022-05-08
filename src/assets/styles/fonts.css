@@ -1,12 +1,5 @@
-ont-face {
-  font-family: Roboto;
-  src: local(Roboto-Regular), url(/path/to/Roboto-Regular.woff2) format("woff2"),
-    url(/path/to/Roboto-Regular.woff) format("woff"),
-    url(/path/to/Roboto-Regular.ttf) format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 .Text-Style-2 {
   font-family: Roboto;
   font-size: 16px;
@@ -25,6 +18,5 @@ ont-face {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: center;
   color: var(--dark);
 }
