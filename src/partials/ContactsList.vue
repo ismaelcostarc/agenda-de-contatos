@@ -9,28 +9,33 @@
     </tr>
 
     <template v-for="(contact, index) in contacts">
-      <tr
-        :key="contact.color"
-        :class="{
-          'table__row--highlighted': false,
-        }"
-      >
-        <td>
-          <div
-            class="table__first-letter"
-            :style="{ 'background-color': '#' + contact.color }"
-          >
-            {{ firstLetter(contact.name) }}
-          </div>
-        </td>
-        <td>{{ contact.name }}</td>
-        <td>{{ contact.email }}</td>
-        <td>{{ contact.phone }}</td>
-        <td class="table__icons">
-          <img src="@/assets/img/ic-edit.svg" @click="editContact(index)" />
-          <img src="@/assets/img/ic-delete.svg" @click="removeContact(index)" />
-        </td>
-      </tr>
+      <template v-if="filterByWord(contact)">
+        <tr
+          :key="contact.color"
+          :class="{
+            'table__row--highlighted': false,
+          }"
+        >
+          <td>
+            <div
+              class="table__first-letter"
+              :style="{ 'background-color': '#' + contact.color }"
+            >
+              {{ firstLetter(contact.name) }}
+            </div>
+          </td>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.email }}</td>
+          <td>{{ contact.phone }}</td>
+          <td class="table__icons">
+            <img src="@/assets/img/ic-edit.svg" @click="editContact(index)" />
+            <img
+              src="@/assets/img/ic-delete.svg"
+              @click="removeContact(index)"
+            />
+          </td>
+        </tr>
+      </template>
     </template>
   </table>
 </template>
@@ -44,10 +49,14 @@ export default {
       type: Boolean,
       required: true,
     },
+    filter: {
+      type: String,
+      required: false,
+      default: "",
+    },
   },
   watch: {
     newContact(value) {
-      // console.log(value);
       if (value) {
         setTimeout(() => {
           this.$emit("newContactExpired");
@@ -70,6 +79,16 @@ export default {
     },
     removeContact(index) {
       this.$emit("showRemoveModal", index);
+    },
+    filterByWord(contact) {
+      const nameStartsWithWord = contact.name
+        .toUpperCase()
+        .startsWith(this.filter.toUpperCase());
+      const emailStartsWithWord = contact.email
+        .toUpperCase()
+        .startsWith(this.filter.toUpperCase());
+
+      return nameStartsWithWord || emailStartsWithWord;
     },
   },
 };

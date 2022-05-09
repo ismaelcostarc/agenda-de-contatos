@@ -14,13 +14,14 @@
     ></remove-contact-modal>
 
     <div class="home">
-      <header-bar @newContact="showModal = true" />
+      <header-bar @newContact="showModal = true" @searchWord="searchWord" />
       <empty-agenda @newContact="showModal = true" v-if="!contacts.length" />
       <contacts-list
         :newContact="newContact"
         @newContactExpired="newContact = false"
         @showEditModal="editContact"
         @showRemoveModal="removeContact"
+        :filter="wordSearched"
         v-else
       />
     </div>
@@ -51,6 +52,7 @@ export default {
       newContact: false,
       isEdition: false,
       contactIndex: 0,
+      wordSearched: "",
     };
   },
   watch: {
@@ -73,6 +75,9 @@ export default {
       this.showModal = false;
       this.showRemoveModal = false;
       this.isEdition = false;
+    },
+    searchWord(word) {
+      this.wordSearched = word;
     },
   },
 };

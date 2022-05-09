@@ -18,6 +18,7 @@
         <input
           type="text"
           class="search-bar__input Text-Style"
+          @input="searchWord"
           placeholder="Buscar"
         />
         <img
@@ -43,6 +44,11 @@ export default {
   },
   computed: {
     ...mapState(["contacts"]),
+  },
+  methods: {
+    searchWord(e) {
+      this.$emit("searchWord", e.target.value);
+    },
   },
 };
 </script>
