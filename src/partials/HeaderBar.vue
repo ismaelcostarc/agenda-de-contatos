@@ -1,10 +1,6 @@
 <template>
   <header class="header">
-    <img
-      src="@/assets/img/ic-logo.png"
-      srcset="@/assets/img/ic-logo@2x.png 2x, @/assets/img/ic-logo@3x.png 3x"
-      class="header__logo"
-    />
+    <img src="@/assets/img/ic-logo.svg" class="header__logo" />
 
     <div class="search-bar__container">
       <button-component @clicked="$emit('newContact')" v-if="contacts.length">
@@ -21,14 +17,8 @@
           @input="searchWord"
           placeholder="Buscar"
         />
-        <img
-          src="@/assets/img/ic-search.png"
-          srcset="
-            @/assets/img/ic-search@2x.png 2x,
-            @/assets/img/ic-search@3x.png 3x
-          "
-          class="search-bar__icon"
-        />
+
+        <img src="@/assets/img/ic-search.svg" class="search-bar__icon" />
       </div>
     </div>
   </header>

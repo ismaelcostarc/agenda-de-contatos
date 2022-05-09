@@ -1,26 +1,26 @@
 <template>
   <div id="app">
     <contact-modal
-      v-if="showModal"
       @close="closeModal"
       :edit="isEdition"
       :contactIndex="contactIndex"
+      v-if="showModal"
     ></contact-modal>
 
     <remove-contact-modal
+      @close="closeModal"
       :contactIndex="contactIndex"
       v-if="showRemoveModal"
-      @close="closeModal"
     ></remove-contact-modal>
 
     <div class="home">
       <header-bar @newContact="showModal = true" @searchWord="searchWord" />
       <empty-agenda @newContact="showModal = true" v-if="!contacts.length" />
       <contacts-list
-        :newContact="newContact"
         @newContactExpired="newContact = false"
         @showEditModal="editContact"
         @showRemoveModal="removeContact"
+        :newContact="newContact"
         :filter="wordSearched"
         v-else
       />

@@ -1,10 +1,6 @@
 <template>
   <div class="empty-agenda">
-    <img
-      src="@/assets/img/ic-book.png"
-      srcset="@/assets/img/ic-book@2x.png 2x, @/assets/img/ic-book@3x.png 3x"
-      class="empty-agenda__book"
-    />
+    <img src="@/assets/img/ic-book.svg" class="empty-agenda__book" />
 
     <span class="Text-Style">Nenhum contato foi criado ainda</span>
 

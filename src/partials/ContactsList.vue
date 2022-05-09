@@ -81,14 +81,14 @@ export default {
       this.$emit("showRemoveModal", index);
     },
     filterByWord(contact) {
-      const nameStartsWithWord = contact.name
+      const nameIncludesWord = contact.name
         .toUpperCase()
-        .startsWith(this.filter.toUpperCase());
-      const emailStartsWithWord = contact.email
+        .includes(this.filter.toUpperCase());
+      const emailIncludesWord = contact.email
         .toUpperCase()
-        .startsWith(this.filter.toUpperCase());
+        .includes(this.filter.toUpperCase());
 
-      return nameStartsWithWord || emailStartsWithWord;
+      return nameIncludesWord || emailIncludesWord;
     },
   },
 };
