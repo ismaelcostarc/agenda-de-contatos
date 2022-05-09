@@ -2,6 +2,7 @@
   <div id="app">
     <contact-modal
       @close="closeModal"
+      @newContact="newContact = true"
       :edit="isEdition"
       :contactIndex="contactIndex"
       v-if="showModal"

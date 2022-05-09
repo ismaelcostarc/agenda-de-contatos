@@ -97,6 +97,9 @@ export default {
       } else {
         this.ADD_CONTACT(this.contact);
       }
+
+      this.$emit("newContact");
+
       this.closeModal();
     },
     closeModal() {

@@ -28,12 +28,14 @@ export default new Vuex.Store({
     ADD_CONTACT(state, data) {
       data.color = newRandomColor();
 
-      /*       if (this.state.contacts.length) {
+      if (this.state.contacts.length) {
         this.state.contacts = this.state.contacts.map((contact) => {
           contact.isLast = false;
+
+          return contact;
         });
       }
-      data.isLast = true; */
+      data.isLast = true;
 
       this.state.contacts.push(data);
 

@@ -13,8 +13,9 @@
         <tr
           :key="contact.color"
           :class="{
-            'table__row--highlighted': false,
+            'table__row--highlighted': mustBeHighlighted(contact),
           }"
+          class="table__row"
         >
           <td>
             <div
@@ -60,7 +61,7 @@ export default {
       if (value) {
         setTimeout(() => {
           this.$emit("newContactExpired");
-        }, 2000);
+        }, 10000);
       }
     },
   },
@@ -134,7 +135,11 @@ export default {
   }
 }
 
-.table__row--highlighted td {
+.table__row--highlighted {
+  background-color: var(--very-light-pink);
+}
+
+.table__row:hover {
   background-color: var(--very-light-pink);
 }
 
