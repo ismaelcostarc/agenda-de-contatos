@@ -56,9 +56,6 @@ export default {
       wordSearched: "",
     };
   },
-  watch: {
-    newContact(value) {},
-  },
   computed: {
     ...mapState(["contacts"]),
   },

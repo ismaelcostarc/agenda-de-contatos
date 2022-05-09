@@ -12,9 +12,9 @@
 
       <div class="header__search-bar">
         <input
+          @input="searchWord"
           type="text"
           class="search-bar__input Text-Style"
-          @input="searchWord"
           placeholder="Buscar"
         />
 
@@ -25,7 +25,7 @@
 </template>
 <script>
 import ButtonComponent from "../components/ButtonComponent.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "HeaderBar",

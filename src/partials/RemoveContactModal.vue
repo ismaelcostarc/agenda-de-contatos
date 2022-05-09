@@ -1,5 +1,5 @@
 <template>
-  <modal-component @close="$emit('close')">
+  <modal-component>
     <div slot="header">Excluir Contato</div>
     <div slot="body">Deseja realmente excluir o contato?</div>
     <div slot="footer" class="new-contact__modal__footer">
@@ -15,7 +15,7 @@ import LinkComponent from "../components/LinkComponent.vue";
 import InputComponent from "../components/InputComponent.vue";
 import ButtonComponent from "../components/ButtonComponent.vue";
 import ModalComponent from "../components/ModalComponent.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 
 export default {
   name: "RemoveContactModal",

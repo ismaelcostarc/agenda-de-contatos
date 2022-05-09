@@ -12,12 +12,7 @@
           </div>
 
           <div class="modal__footer">
-            <slot name="footer">
-              Rodapé Padrão
-              <button class="modal__default-button" @click="$emit('close')">
-                Fechar
-              </button>
-            </slot>
+            <slot name="footer"> Rodapé Padrão </slot>
           </div>
         </div>
       </div>
@@ -69,10 +64,6 @@ export default {
   &__footer {
     padding: 1rem;
     border-top: solid 1px #c0c3d2;
-  }
-
-  &__default-button {
-    float: right;
   }
 }
 

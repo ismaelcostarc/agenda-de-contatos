@@ -19,8 +19,8 @@
         >
           <td>
             <div
-              class="table__first-letter"
               :style="{ 'background-color': '#' + contact.color }"
+              class="table__first-letter"
             >
               {{ firstLetter(contact.name) }}
             </div>
@@ -29,10 +29,10 @@
           <td>{{ contact.email }}</td>
           <td>{{ contact.phone }}</td>
           <td class="table__icons">
-            <img src="@/assets/img/ic-edit.svg" @click="editContact(index)" />
+            <img @click="editContact(index)" src="@/assets/img/ic-edit.svg" />
             <img
-              src="@/assets/img/ic-delete.svg"
               @click="removeContact(index)"
+              src="@/assets/img/ic-delete.svg"
             />
           </td>
         </tr>
@@ -41,7 +41,7 @@
   </table>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "ContactsList",
@@ -73,6 +73,7 @@ export default {
       return name.charAt(0).toUpperCase();
     },
     mustBeHighlighted(contact) {
+      console.log(contact, this.newContact);
       return contact.isLast && this.newContact;
     },
     editContact(index) {

@@ -2,12 +2,12 @@
   <div class="input__container">
     <label :for="'input-' + id" class="input__label">{{ label }}</label>
     <input
-      type="text"
-      :id="'input-' + id"
-      class="input"
-      :class="{ 'input--block': block }"
       @input="handleInput"
+      :id="'input-' + id"
       :value="value"
+      :class="{ 'input--block': block }"
+      class="input"
+      type="text"
     />
   </div>
 </template>

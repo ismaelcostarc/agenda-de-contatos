@@ -1,12 +1,12 @@
 <template>
   <button
-    class="button"
+    @click="!disabled && $emit('clicked')"
     :class="{
       'button--primary': type === 'primary',
       'button--secondary': type === 'secondary',
       'button--disabled': disabled,
     }"
-    @click="!disabled && $emit('clicked')"
+    class="button"
   >
     <slot></slot>
   </button>

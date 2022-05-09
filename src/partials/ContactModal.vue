@@ -1,5 +1,5 @@
 <template>
-  <modal-component @close="closeModal">
+  <modal-component>
     <div slot="header">
       <template v-if="edit">Editar Contato</template>
       <template v-else>Criar novo contato</template>
@@ -28,9 +28,9 @@
     </div>
     <div slot="footer" class="new-contact__modal__footer">
       <button-component
-        type="secondary"
-        :disabled="isFormEmpty"
         @clicked="addContact"
+        :disabled="isFormEmpty"
+        type="secondary"
         >Salvar</button-component
       >
       <link-component @clicked="closeModal">Cancelar</link-component>
@@ -96,9 +96,8 @@ export default {
         this.EDIT_CONTACT(data);
       } else {
         this.ADD_CONTACT(this.contact);
+        this.$emit("newContact");
       }
-
-      this.$emit("newContact");
 
       this.closeModal();
     },
