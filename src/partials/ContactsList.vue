@@ -10,7 +10,7 @@
 
     <template v-for="(contact, index) in contacts">
       <tr
-        :key="index"
+        :key="contact.color"
         :class="{
           'table__row--highlighted': false,
         }"
@@ -55,9 +55,6 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log(this.newContact);
-  },
   computed: {
     ...mapState(["contacts"]),
   },
@@ -70,6 +67,9 @@ export default {
     },
     editContact(index) {
       this.$emit("showEditModal", index);
+    },
+    removeContact(index) {
+      this.$emit("showRemoveModal", index);
     },
   },
 };

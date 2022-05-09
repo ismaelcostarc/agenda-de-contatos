@@ -1,6 +1,17 @@
 <template>
   <div id="app">
-    <contact-modal v-if="showModal" @close="showModal = false"></contact-modal>
+    <contact-modal
+      v-if="showModal"
+      @close="closeModal"
+      :edit="isEdition"
+      :contactIndex="contactIndex"
+    ></contact-modal>
+
+    <remove-contact-modal
+      :contactIndex="contactIndex"
+      v-if="showRemoveModal"
+      @close="closeModal"
+    ></remove-contact-modal>
 
     <div class="home">
       <header-bar @newContact="showModal = true" />
@@ -8,7 +19,8 @@
       <contacts-list
         :newContact="newContact"
         @newContactExpired="newContact = false"
-        @showEditModal="showEditModal"
+        @showEditModal="editContact"
+        @showRemoveModal="removeContact"
         v-else
       />
     </div>
@@ -20,7 +32,8 @@ import HeaderBar from "./partials/HeaderBar.vue";
 import EmptyAgenda from "./partials/EmptyAgenda.vue";
 import ContactModal from "./partials/ContactModal.vue";
 import ContactsList from "./partials/ContactsList.vue";
-import { mapState, mapMutations } from "vuex";
+import RemoveContactModal from "./partials/RemoveContactModal.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
@@ -29,42 +42,38 @@ export default {
     EmptyAgenda,
     ContactModal,
     ContactsList,
+    RemoveContactModal,
   },
   data() {
     return {
       showModal: false,
-      contact: {
-        name: "",
-        email: "",
-        phone: "",
-      },
+      showRemoveModal: false,
       newContact: false,
+      isEdition: false,
+      contactIndex: 0,
     };
   },
   watch: {
-    newContact(value) {
-      //console.log(value);
-    },
+    newContact(value) {},
   },
   computed: {
     ...mapState(["contacts"]),
-    isFormEmpty() {
-      return !this.contact.name && !this.contact.email && !this.contact.phone;
-    },
   },
   methods: {
-    ...mapMutations(["ADD_CONTACT", "REMOVE_CONTACT"]),
-    addContact() {
-      this.ADD_CONTACT(this.contact);
-      this.contact = {
-        name: "",
-        email: "",
-        phone: "",
-      };
-      this.showModal = false;
-      this.newContact = true;
+    editContact(index) {
+      this.isEdition = true;
+      this.contactIndex = index;
+      this.showModal = true;
     },
-    showEditModal() {},
+    removeContact(index) {
+      this.showRemoveModal = true;
+      this.contactIndex = index;
+    },
+    closeModal() {
+      this.showModal = false;
+      this.showRemoveModal = false;
+      this.isEdition = false;
+    },
   },
 };
 </script>

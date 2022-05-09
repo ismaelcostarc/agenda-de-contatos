@@ -7,6 +7,7 @@
       class="input"
       :class="{ 'input--block': block }"
       @input="handleInput"
+      :value="value"
     />
   </div>
 </template>

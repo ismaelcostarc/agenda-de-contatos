@@ -1,6 +1,9 @@
 <template>
-  <modal-component @close="$emit('close')">
-    <div slot="header">Criar novo contato</div>
+  <modal-component @close="closeModal">
+    <div slot="header">
+      <template v-if="edit">Editar Contato</template>
+      <template v-else>Criar novo contato</template>
+    </div>
     <div slot="body">
       <form class="new-contact__modal__form">
         <input-component
@@ -30,7 +33,7 @@
         @clicked="addContact"
         >Salvar</button-component
       >
-      <link-component @clicked="$emit('close')">Cancelar</link-component>
+      <link-component @clicked="closeModal">Cancelar</link-component>
     </div>
   </modal-component>
 </template>
@@ -49,6 +52,18 @@ export default {
     ButtonComponent,
     ModalComponent,
   },
+  props: {
+    edit: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    contactIndex: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+  },
   data() {
     return {
       contact: {
@@ -58,15 +73,33 @@ export default {
       },
     };
   },
+  created() {
+    if (this.edit) {
+      const { name, email, phone } = this.contacts[this.contactIndex];
+      this.contact = { name, email, phone };
+    }
+  },
   computed: {
+    ...mapState(["contacts"]),
     isFormEmpty() {
       return !this.contact.name && !this.contact.email && !this.contact.phone;
     },
   },
   methods: {
-    ...mapMutations(["ADD_CONTACT", "REMOVE_CONTACT"]),
+    ...mapMutations(["ADD_CONTACT", "EDIT_CONTACT", "REMOVE_CONTACT"]),
     addContact() {
-      this.ADD_CONTACT(this.contact);
+      if (this.edit) {
+        const data = {
+          contact: this.contact,
+          index: this.contactIndex,
+        };
+        this.EDIT_CONTACT(data);
+      } else {
+        this.ADD_CONTACT(this.contact);
+      }
+      this.closeModal();
+    },
+    closeModal() {
       this.$emit("close");
     },
   },

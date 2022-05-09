@@ -27,6 +27,11 @@ export default new Vuex.Store({
 
       this.state.contacts.sort(sortByAlphabeticalOrder);
     },
+    EDIT_CONTACT(state, data) {
+      data.contact.color = Math.floor(Math.random() * 16777215).toString(16);
+
+      this.state.contacts[data.index] = data.contact;
+    },
     REMOVE_CONTACT(state, index) {
       this.state.contacts.splice(index, 1);
     },
