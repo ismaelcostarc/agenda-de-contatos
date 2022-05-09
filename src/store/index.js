@@ -9,7 +9,10 @@ const vuexLocal = new VuexPersistence({
 Vue.use(Vuex);
 
 const sortByAlphabeticalOrder = (a, b) => {
-  return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+  const firstName = a.name.toUpperCase();
+  const secondName = b.name.toUpperCase();
+
+  return firstName > secondName ? 1 : secondName > firstName ? -1 : 0;
 };
 
 export default new Vuex.Store({
