@@ -15,6 +15,10 @@ const sortByAlphabeticalOrder = (a, b) => {
   return firstName > secondName ? 1 : secondName > firstName ? -1 : 0;
 };
 
+const newRandomColor = () => {
+  return Math.floor(Math.random() * 16777215).toString(16);
+};
+
 export default new Vuex.Store({
   state: {
     contacts: [],
@@ -22,7 +26,7 @@ export default new Vuex.Store({
   getters: {},
   mutations: {
     ADD_CONTACT(state, data) {
-      data.color = Math.floor(Math.random() * 16777215).toString(16);
+      data.color = newRandomColor();
 
       /*       if (this.state.contacts.length) {
         this.state.contacts = this.state.contacts.map((contact) => {
@@ -36,9 +40,9 @@ export default new Vuex.Store({
       this.state.contacts.sort(sortByAlphabeticalOrder);
     },
     EDIT_CONTACT(state, data) {
-      data.contact.color = Math.floor(Math.random() * 16777215).toString(16);
-
-      this.state.contacts[data.index] = data.contact;
+      this.state.contacts[data.index].name = data.contact.name;
+      this.state.contacts[data.index].email = data.contact.email;
+      this.state.contacts[data.index].phone = data.contact.phone;
     },
     REMOVE_CONTACT(state, index) {
       this.state.contacts.splice(index, 1);
