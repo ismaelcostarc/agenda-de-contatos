@@ -50,19 +50,23 @@ export default {
   padding: 0.5rem;
   border-radius: 4px;
   border: solid 1px #c0c3d2;
-}
 
-.input__container {
-  display: flex;
-  flex-direction: column;
-}
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
 
-.input--block {
-  width: initial;
-}
+  &--block {
+    width: initial;
+  }
 
-.input__label {
-  margin: 0.25rem 0;
-  font-size: 0.875rem;
+  &__label {
+    margin: 0.25rem 0;
+    font-size: 0.875rem;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 </style>

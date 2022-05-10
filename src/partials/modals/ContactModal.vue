@@ -38,10 +38,10 @@
   </modal-component>
 </template>
 <script>
-import LinkComponent from "../components/LinkComponent.vue";
-import InputComponent from "../components/InputComponent.vue";
-import ButtonComponent from "../components/ButtonComponent.vue";
-import ModalComponent from "../components/ModalComponent.vue";
+import LinkComponent from "../../components/LinkComponent.vue";
+import InputComponent from "../../components/InputComponent.vue";
+import ButtonComponent from "../../components/ButtonComponent.vue";
+import ModalComponent from "../../components/ModalComponent.vue";
 import { mapState, mapMutations } from "vuex";
 
 export default {
@@ -108,14 +108,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.new-contact__modal__form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+.new-contact__modal {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-.new-contact__modal__footer {
-  display: flex;
-  flex-direction: row-reverse;
+  &__footer {
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }
 </style>

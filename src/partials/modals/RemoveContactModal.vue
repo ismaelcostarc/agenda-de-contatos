@@ -11,10 +11,10 @@
   </modal-component>
 </template>
 <script>
-import LinkComponent from "../components/LinkComponent.vue";
-import InputComponent from "../components/InputComponent.vue";
-import ButtonComponent from "../components/ButtonComponent.vue";
-import ModalComponent from "../components/ModalComponent.vue";
+import LinkComponent from "../../components/LinkComponent.vue";
+import InputComponent from "../../components/InputComponent.vue";
+import ButtonComponent from "../../components/ButtonComponent.vue";
+import ModalComponent from "../../components/ModalComponent.vue";
 import { mapMutations } from "vuex";
 
 export default {

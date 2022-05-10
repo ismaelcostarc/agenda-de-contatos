@@ -65,21 +65,21 @@ export default {
     padding: 1rem;
     border-top: solid 1px #c0c3d2;
   }
-}
 
-/********** Transições ********/
+  /********** Transições ********/
 
-.modal-enter {
-  opacity: 0;
-}
+  &-enter {
+    opacity: 0;
+  }
 
-.modal-leave-active {
-  opacity: 0;
-}
+  &-leave-active {
+    opacity: 0;
+  }
 
-.modal-enter .modal__container,
-.modal-leave-active .modal__container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  &-enter &__container,
+  &-leave-active &__container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
 }
 </style>

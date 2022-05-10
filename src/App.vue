@@ -2,7 +2,7 @@
   <div id="app">
     <contact-modal
       @close="closeModal"
-      @newContact="newContact = true"
+      @newContact="isNewContact = true"
       :edit="isEdition"
       :contactIndex="contactIndex"
       v-if="showModal"
@@ -18,10 +18,10 @@
       <header-bar @newContact="showModal = true" @searchWord="searchWord" />
       <empty-agenda @newContact="showModal = true" v-if="!contacts.length" />
       <contacts-list
-        @newContactExpired="newContact = false"
+        @newContactExpired="isNewContact = false"
         @showEditModal="editContact"
         @showRemoveModal="removeContact"
-        :newContact="newContact"
+        :isNewContact="isNewContact"
         :filter="wordSearched"
         v-else
       />
@@ -32,9 +32,9 @@
 <script>
 import HeaderBar from "./partials/HeaderBar.vue";
 import EmptyAgenda from "./partials/EmptyAgenda.vue";
-import ContactModal from "./partials/ContactModal.vue";
+import ContactModal from "./partials/modals/ContactModal.vue";
 import ContactsList from "./partials/ContactsList.vue";
-import RemoveContactModal from "./partials/RemoveContactModal.vue";
+import RemoveContactModal from "./partials/modals/RemoveContactModal.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -50,7 +50,7 @@ export default {
     return {
       showModal: false,
       showRemoveModal: false,
-      newContact: false,
+      isNewContact: false,
       isEdition: false,
       contactIndex: 0,
       wordSearched: "",
@@ -61,13 +61,13 @@ export default {
   },
   methods: {
     editContact(index) {
-      this.isEdition = true;
       this.contactIndex = index;
       this.showModal = true;
+      this.isEdition = true;
     },
     removeContact(index) {
-      this.showRemoveModal = true;
       this.contactIndex = index;
+      this.showRemoveModal = true;
     },
     closeModal() {
       this.showModal = false;

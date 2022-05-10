@@ -1,44 +1,46 @@
 <template>
-  <table class="contacts__table">
-    <tr>
-      <th></th>
-      <th>Contatos</th>
-      <th>E-mail</th>
-      <th>Telefone</th>
-      <th></th>
-    </tr>
+  <div class="table__container">
+    <table class="contacts__table">
+      <tr>
+        <th></th>
+        <th>Contatos</th>
+        <th>E-mail</th>
+        <th>Telefone</th>
+        <th></th>
+      </tr>
 
-    <template v-for="(contact, index) in contacts">
-      <template v-if="filterByWord(contact)">
-        <tr
-          :key="contact.color"
-          :class="{
-            'table__row--highlighted': mustBeHighlighted(contact),
-          }"
-          class="table__row"
-        >
-          <td>
-            <div
-              :style="{ 'background-color': '#' + contact.color }"
-              class="table__first-letter"
-            >
-              {{ firstLetter(contact.name) }}
-            </div>
-          </td>
-          <td>{{ contact.name }}</td>
-          <td>{{ contact.email }}</td>
-          <td>{{ contact.phone }}</td>
-          <td class="table__icons">
-            <img @click="editContact(index)" src="@/assets/img/ic-edit.svg" />
-            <img
-              @click="removeContact(index)"
-              src="@/assets/img/ic-delete.svg"
-            />
-          </td>
-        </tr>
+      <template v-for="(contact, index) in contacts">
+        <template v-if="filterByWord(contact)">
+          <tr
+            :key="contact.color"
+            :class="{
+              'table__row--highlighted': mustBeHighlighted(contact),
+            }"
+            class="table__row"
+          >
+            <td>
+              <div
+                :style="{ 'background-color': '#' + contact.color }"
+                class="table__first-letter"
+              >
+                {{ firstLetterOf(contact.name) }}
+              </div>
+            </td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.phone }}</td>
+            <td class="table__icons">
+              <img @click="editContact(index)" src="@/assets/img/ic-edit.svg" />
+              <img
+                @click="removeContact(index)"
+                src="@/assets/img/ic-delete.svg"
+              />
+            </td>
+          </tr>
+        </template>
       </template>
-    </template>
-  </table>
+    </table>
+  </div>
 </template>
 <script>
 import { mapState } from "vuex";
@@ -46,7 +48,7 @@ import { mapState } from "vuex";
 export default {
   name: "ContactsList",
   props: {
-    newContact: {
+    isNewContact: {
       type: Boolean,
       required: true,
     },
@@ -57,7 +59,7 @@ export default {
     },
   },
   watch: {
-    newContact(value) {
+    isNewContact(value) {
       if (value) {
         setTimeout(() => {
           this.$emit("newContactExpired");
@@ -69,12 +71,11 @@ export default {
     ...mapState(["contacts"]),
   },
   methods: {
-    firstLetter(name) {
+    firstLetterOf(name) {
       return name.charAt(0).toUpperCase();
     },
     mustBeHighlighted(contact) {
-      console.log(contact, this.newContact);
-      return contact.isLast && this.newContact;
+      return contact.isLastContact && this.isNewContact;
     },
     editContact(index) {
       this.$emit("showEditModal", index);
@@ -136,20 +137,26 @@ export default {
   }
 }
 
-.table__row--highlighted {
-  background-color: var(--very-light-pink);
-}
+.table {
+  &__container {
+    padding: 1rem;
+  }
 
-.table__row:hover {
-  background-color: var(--very-light-pink);
-}
+  &__row--highlighted {
+    background-color: var(--very-light-pink);
+  }
 
-.table__icons {
-  display: flex;
-  gap: 1rem;
+  &__row:hover {
+    background-color: var(--very-light-pink);
+  }
 
-  img {
-    cursor: pointer;
+  &__icons {
+    display: flex;
+    gap: 1rem;
+
+    img {
+      cursor: pointer;
+    }
   }
 }
 </style>

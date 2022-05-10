@@ -30,15 +30,14 @@ export default new Vuex.Store({
 
       if (this.state.contacts.length) {
         this.state.contacts = this.state.contacts.map((contact) => {
-          contact.isLast = false;
+          contact.isLastContact = false;
 
           return contact;
         });
       }
-      data.isLast = true;
+      data.isLastContact = true;
 
       this.state.contacts.push(data);
-
       this.state.contacts.sort(sortByAlphabeticalOrder);
     },
     EDIT_CONTACT(state, data) {
